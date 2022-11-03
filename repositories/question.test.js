@@ -104,7 +104,7 @@ describe('question repository', () => {
       }
       await questionRepo.addQuestion(testQuestion1)
 
-      expect((await questionRepo.getQuestions()).length).toBeGreaterThan(testQuestions.length)
+      expect((await questionRepo.getQuestions()).length).toEqual(testQuestions.length + 1)
 
 
       const testQuestion2 = {
@@ -113,7 +113,7 @@ describe('question repository', () => {
       }
       await questionRepo.addQuestion(testQuestion2)
 
-      expect((await questionRepo.getQuestions()).length).toBeGreaterThan(testQuestions.length + 1)
+      expect((await questionRepo.getQuestions()).length).toEqual(testQuestions.length + 2)
 
     })
 
@@ -173,8 +173,7 @@ describe('question repository', () => {
 
       await expect(questionRepo.addQuestion(testQuestion2)).rejects.toThrow()
 
-      const testQuestion3 = {
-      }
+      const testQuestion3 = {}
 
       await expect(questionRepo.addQuestion(testQuestion3)).rejects.toThrow()
     })
@@ -376,7 +375,7 @@ describe('question repository', () => {
       }
       await questionRepo.addAnswer(uuid1, testAnswer1)
 
-      expect((await questionRepo.getAnswers(uuid1)).length).toBeGreaterThan(testQuestions[0].answers.length)
+      expect((await questionRepo.getAnswers(uuid1)).length).toEqual(testQuestions[0].answers.length + 1)
 
 
       const testAnswer2 = {
@@ -385,7 +384,7 @@ describe('question repository', () => {
       }
       await questionRepo.addAnswer(uuid1, testAnswer2)
 
-      expect((await questionRepo.getAnswers(uuid1)).length).toBeGreaterThan(testQuestions[0].answers.length + 1)
+      expect((await questionRepo.getAnswers(uuid1)).length).toEqual(testQuestions[0].answers.length + 2)
 
     })
 
@@ -490,8 +489,7 @@ describe('question repository', () => {
 
       await expect(questionRepo.addAnswer(uuid1, testQuestion2)).rejects.toThrow()
 
-      const testQuestion3 = {
-      }
+      const testQuestion3 = {}
 
       await expect(questionRepo.addAnswer(uuid1, testQuestion3)).rejects.toThrow()
     })

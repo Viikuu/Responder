@@ -24,7 +24,8 @@ app.get('/questions/:questionId', async (req, res) => {
   const { questionId } = req.params
   const question = await req.repositories.questionRepo.getQuestionById(questionId)
   if(question === undefined) {
-    res.code(404).json({ error: {message: 'Item with specified Id doesn\'t exist'}})
+    res.code(404).json({ success: false, error: {message: `Question with specified Id doesn't exist`}})
+    return
   }
   res.json(question)
 })
@@ -39,7 +40,8 @@ app.get('/questions/:questionId/answers', async (req, res) => {
   const { questionId } = req.params
   const answers = await req.repositories.questionRepo.getAnswers(questionId)
   if(answers === undefined) {
-    res.code(404).json({ success: false, error: {message: 'Question with specified Id doesn\'t exist'}})
+    res.code(404).json({ success: false, error: {message: `Question with specified Id doesn't exist`}})
+    return
   }
   res.json(answers)
 })
@@ -55,7 +57,8 @@ app.get('/questions/:questionId/answers/:answerId', async (req, res) => {
   const { questionId, answerId } = req.params
   const answer = await req.repositories.questionRepo.getAnswer(questionId, answerId)
   if(answer === undefined) {
-    res.code(404).json({ success: false, error: {message: 'Question or Answer with specified Id doesn\'t exist'}})
+    res.code(404).json({ success: false, error: {message: `Question or Answer with specified Id doesn't exist`}})
+    return
   }
   res.json(answer)
 })

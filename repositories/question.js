@@ -17,10 +17,10 @@ const makeQuestionRepository = fileName => {
 
   const addQuestion = async question => {
     let questions = await getQuestions()
-    if (question.author === undefined || typeof question.author !== 'string') {
+    if (typeof question.author !== 'string') {
       throw new Error(`Expected question.author to be a string, got ${typeof question.author}`)
     }
-    if (question.summary === undefined || typeof question.summary !== 'string') {
+    if (typeof question.summary !== 'string') {
       throw new Error(`Expected question.summary to be a string, got ${typeof question.summary}`)
     }
 
@@ -36,7 +36,7 @@ const makeQuestionRepository = fileName => {
   const getAnswers = async questionId => {
     const question = await getQuestionById(questionId)
 
-    return question === undefined ? undefined : question.answers
+    return question?.answers
   }
 
   const getAnswer = async (questionId, answerId) => {
